@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Marks Entry</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>Student Marks Entry Form</h2>
+  </header>
+
+  <main>
+    <form id="marksForm">
+      <label for="studentName">Student Name:</label><br>
+      <input type="text" id="studentName" name="studentName" required><br><br>
+
+      <label for="rollNo">Roll Number:</label><br>
+      <input type="text" id="rollNo" name="rollNo" required><br><br>
+
+      <label for="subject">Subject:</label><br>
+      <select id="subject" name="subject" required>
+        <option value="">--Select Subject--</option>
+        <option value="Math">Math</option>
+        <option value="Science">Science</option>
+        <option value="English">English</option>
+        <option value="Computer">Computer</option>
+      </select><br><br>
+
+      <label for="marks">Marks:</label><br>
+      <input type="number" id="marks" name="marks" min="0" max="100" required><br><br>
+
+      <button type="submit">Add Marks</button>
+    </form>
+
+    <section>
+      <h3>Student Marks Table</h3>
+      <table id="marksTable">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Roll No</th>
+            <th>Subject</th>
+            <th>Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamic rows will appear here -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('marksForm');
+    const table = document.getElementById('marksTable').getElementsByTagName('tbody')[0];
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('studentName').value;
+      const roll = document.getElementById('rollNo').value;
+      const subject = document.getElementById('subject').value;
+      const marks = document.getElementById('marks').value;
+
+      const newRow = table.insertRow();
+
+      newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${roll}</td>
+        <td>${subject}</td>
+        <td>${marks}</td>
+      `;
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
